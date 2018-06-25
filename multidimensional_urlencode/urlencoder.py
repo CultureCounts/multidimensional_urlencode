@@ -54,7 +54,7 @@ def parametrize(params):
     return returned
 
 
-def urlencode(params):
+def urlencode(params, array_braces=True):
     """Urlencode a multidimensional dict."""
 
     # Not doing duck typing here. Will make debugging easier.
@@ -68,7 +68,7 @@ def urlencode(params):
         value = param.pop()
 
         name = parametrize(param)
-        if isinstance(value, (list, tuple)):
+        if isinstance(value, (list, tuple)) and array_braces:
             name += "[]"
 
         url_params[name] = value
