@@ -63,11 +63,16 @@ def parametrize(params):
 def urlencode(params, encode_list_key=False, array_braces=True):
     """Urlencode a multidimensional dict.
 
-    >>> urlencode({'a': {"b": [1, 2, 3]}})
+    >>> try:
+    ...     from urllib.parse import quote, unquote
+    ... except ImportError:
+    ...     from urllib import quote, unquote
+    ...
+    >>> unquote(urlencode({'a': {"b": [1, 2, 3]}}))
     'a[b][]=1&a[b][]=2&a[b][]=3'
-    >>> urlencode({'a': {"b": [1, 2, 3]}}, array_braces=False)
+    >>> unquote(urlencode({'a': {"b": [1, 2, 3]}}, array_braces=False))
     'a[b]=1&a[b]=2&a[b]=3'
-    >>> urlencode({'a': {"b": [1, 2, 3]}}, encode_list_key=True)
+    >>> unquote(urlencode({'a': {"b": [1, 2, 3]}}, encode_list_key=True))
     'a[b][0]=1&a[b][1]=2&a[b][2]=3'
 
     """
