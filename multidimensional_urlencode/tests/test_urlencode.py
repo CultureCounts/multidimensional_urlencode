@@ -42,6 +42,7 @@ def test_with_non_dict():
     with pytest.raises(TypeError):
         urlencode("e")
 
+
 def test_no_array_braces():
     """Verify that array braces can be left off."""
     d = {'a': {"b": [1, 2, 3]}}
